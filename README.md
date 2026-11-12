@@ -1,7 +1,9 @@
 # prakunin/homebrew-tap
 
 ```sh
-brew install --cask prakunin/tap/quietglobe
+brew tap prakunin/tap
+brew trust prakunin/tap      # Homebrew 7+: third-party taps must be trusted
+brew install --cask quietglobe
 ```
 
 | Cask | App |

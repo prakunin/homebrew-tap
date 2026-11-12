@@ -20,13 +20,23 @@ cask "quietglobe" do
 
   # Signed with a self-signed certificate, not notarized: Gatekeeper would block
   # a quarantined copy, so drop the quarantine flag Homebrew adds on download.
+  # Install steps cannot refer to appdir, hence the fixed path (see caveats).
   postflight_steps do
     run "/usr/bin/xattr",
-        args:           ["-dr", "com.apple.quarantine", "#{appdir}/QuietGlobe.app"],
-        writable_paths: ["#{appdir}/QuietGlobe.app"]
+        args:           ["-dr", "com.apple.quarantine", "/Applications/QuietGlobe.app"],
+        must_succeed:   false,
+        writable_paths: ["/Applications/QuietGlobe.app"]
   end
 
   uninstall quit: "io.github.prakunin.quietglobe"
+
+  caveats <<~EOS
+    Grant Accessibility on first launch:
+      System Settings → Privacy & Security → Accessibility.
+    QuietGlobe updates itself (menu → Check for Updates…).
+    With a custom --appdir, clear the quarantine flag yourself:
+      xattr -dr com.apple.quarantine <appdir>/QuietGlobe.app
+  EOS
 
   zap trash: [
     "~/Library/Caches/io.github.prakunin.quietglobe",
