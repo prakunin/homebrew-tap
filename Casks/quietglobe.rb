@@ -30,6 +30,12 @@ cask "quietglobe" do
 
   uninstall quit: "io.github.prakunin.quietglobe"
 
+  zap trash: [
+    "~/Library/Caches/io.github.prakunin.quietglobe",
+    "~/Library/HTTPStorages/io.github.prakunin.quietglobe",
+    "~/Library/Preferences/io.github.prakunin.quietglobe.plist",
+  ]
+
   caveats <<~EOS
     Grant Accessibility on first launch:
       System Settings → Privacy & Security → Accessibility.
@@ -37,10 +43,4 @@ cask "quietglobe" do
     With a custom --appdir, clear the quarantine flag yourself:
       xattr -dr com.apple.quarantine <appdir>/QuietGlobe.app
   EOS
-
-  zap trash: [
-    "~/Library/Caches/io.github.prakunin.quietglobe",
-    "~/Library/HTTPStorages/io.github.prakunin.quietglobe",
-    "~/Library/Preferences/io.github.prakunin.quietglobe.plist",
-  ]
 end
