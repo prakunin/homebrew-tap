@@ -14,16 +14,16 @@ cask "quietglobe" do
 
   # Sparkle updates the app itself; `brew upgrade --greedy` also works.
   auto_updates true
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   app "QuietGlobe.app"
 
   # Signed with a self-signed certificate, not notarized: Gatekeeper would block
   # a quarantined copy, so drop the quarantine flag Homebrew adds on download.
-  postflight do
-    system_command "/usr/bin/xattr",
-                   args: ["-dr", "com.apple.quarantine", "#{appdir}/QuietGlobe.app"],
-                   sudo: false
+  postflight_steps do
+    run "/usr/bin/xattr",
+        args:           ["-dr", "com.apple.quarantine", "#{appdir}/QuietGlobe.app"],
+        writable_paths: ["#{appdir}/QuietGlobe.app"]
   end
 
   uninstall quit: "io.github.prakunin.quietglobe"
