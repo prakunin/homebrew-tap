@@ -1,6 +1,6 @@
 cask "quietglobe" do
-  version "1.3.0"
-  sha256 "a39b66cae573e86e8c0048d5e923d65290f5c81362f30a6459a6071e7fda9f7a"
+  version "1.3.1"
+  sha256 "2ef55619e3a4480b09b307583b7bab6160afd203900fa598e5cd314aa426bd6e"
 
   url "https://github.com/prakunin/quietglobe/releases/download/v#{version}/QuietGlobe.zip"
   name "QuietGlobe"
